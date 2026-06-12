@@ -53,6 +53,12 @@
             cursor: pointer;
             text-transform: uppercase;
             font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-main);
         }
 
         .lang-btn.active {
@@ -219,14 +225,14 @@
             padding-left: 0;
         }
 
-            .info-item ul li {
-                color: var(--text-muted);
-                font-size: 0.85rem;
-                line-height: 1.6;
-                margin-bottom: 6px;
-                position: relative;
-                padding-left: 14px;
-            }
+        .info-item ul li {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 14px;
+        }
 
         .info-item ul li::before {
             content: "•";
@@ -316,6 +322,38 @@
             padding-bottom: 10px;
         }
 
+        /* DİL GİZLEME/GÖSTERME SINIFI */
+        [data-i18n] {
+            display: none;
+        }
+        
+        .lang-tr [data-i18n="tr"],
+        .lang-en [data-i18n="en"],
+        .lang-it [data-i18n="it"] {
+            display: inline;
+        }
+
+        .lang-tr blockquote[data-i18n="tr"],
+        .lang-en blockquote[data-i18n="en"],
+        .lang-it blockquote[data-i18n="it"],
+        .lang-tr p[data-i18n="tr"],
+        .lang-en p[data-i18n="en"],
+        .lang-it p[data-i18n="it"],
+        .lang-tr div[data-i18n="tr"],
+        .lang-en div[data-i18n="en"],
+        .lang-it div[data-i18n="it"],
+        .lang-tr li[data-i18n="tr"],
+        .lang-en li[data-i18n="en"],
+        .lang-it li[data-i18n="it"] {
+            display: block;
+        }
+
+        .lang-tr span[data-i18n="tr"],
+        .lang-en span[data-i18n="en"],
+        .lang-it span[data-i18n="it"] {
+            display: inline-block;
+        }
+
         /* MOBİL UYUM */
         @media (max-width: 900px) {
             .main-grid {
@@ -327,14 +365,12 @@
         }
     </style>
 </head>
-<body>
-
-<div class="wrapper">
+<body class="lang-tr"> <div class="wrapper">
 
     <div class="lang-switcher">
-        <button class="lang-btn active">EN</button>
-        <button class="lang-btn">TR</button>
-        <button class="lang-btn">IT</button>
+        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn active" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" onclick="setLanguage('it')">IT</button>
     </div>
 
     <header>
@@ -342,10 +378,26 @@
         <div class="subtitle">Sports Management & Product Specialist</div>
         
         <div class="nav-buttons">
-            <a href="#" class="nav-btn active">📊 Dashboard</a>
-            <a href="#" class="nav-btn">💼 Work Experience</a>
-            <a href="#" class="nav-btn">🛠️ Tech Skills</a>
-            <a href="#" class="nav-btn">🎓 Education</a>
+            <a href="#" class="nav-btn active">
+                <span data-i18n="tr">📊 Panel</span>
+                <span data-i18n="en">📊 Dashboard</span>
+                <span data-i18n="it">📊 Dashboard</span>
+            </a>
+            <a href="#" class="nav-btn">
+                <span data-i18n="tr">💼 İş Deneyimi</span>
+                <span data-i18n="en">💼 Work Experience</span>
+                <span data-i18n="it">💼 Esperienza</span>
+            </a>
+            <a href="#" class="nav-btn">
+                <span data-i18n="tr">🛠️ Yetkinlikler</span>
+                <span data-i18n="en">🛠️ Tech Skills</span>
+                <span data-i18n="it">🛠️ Competenze</span>
+            </a>
+            <a href="#" class="nav-btn">
+                <span data-i18n="tr">🎓 Eğitim</span>
+                <span data-i18n="en">🎓 Education</span>
+                <span data-i18n="it">🎓 Formazione</span>
+            </a>
         </div>
 
         <div class="contact-bar">
@@ -362,14 +414,28 @@
         <div class="left-column">
             
             <div class="card">
-                <h2 class="section-title">Summary</h2>
-                <p class="summary-text">
+                <h2 class="section-title">
+                    <span data-i18n="tr">Özet</span>
+                    <span data-i18n="en">Summary</span>
+                    <span data-i18n="it">Sommario</span>
+                </h2>
+                <p class="summary-text" data-i18n="tr">
                     Ekonomi kökenli, Spor Yönetimi alanında yüksek lisans derecesine sahip, ürün yönetimi, uygulama içi test süreçleri ve veri analitiği konularında deneyimli profesyonel. İş döngüleri boyunca disiplinler arası takımlarla ortak çalışarak ürün kullanılabilirliğini ve operasyonel verimliliği artırmaya odaklanır.
+                </p>
+                <p class="summary-text" data-i18n="en">
+                    Economics background with a Master's degree in Sports Management. Experienced in product management, in-app testing, and data analytics. Focused on enhancing product usability and operational efficiency by collaborating with cross-functional teams throughout development cycles.
+                </p>
+                <p class="summary-text" data-i18n="it">
+                    Background in Economia con un Master in Sports Management. Esperienza in gestione del prodotto, in-app testing e analisi dei dati. Focalizzato sul miglioramento dell'usabilità del prodotto e dell'efficienza operativa collaborando con team interfunzionali.
                 </p>
             </div>
 
             <div class="card">
-                <h2 class="section-title">Work Experience</h2>
+                <h2 class="section-title">
+                    <span data-i18n="tr">İş Deneyimi</span>
+                    <span data-i18n="en">Work Experience</span>
+                    <span data-i18n="it">Esperienza Lavorativa</span>
+                </h2>
                 
                 <div class="info-item">
                     <div class="info-header">
@@ -377,9 +443,17 @@
                         <div class="info-date">10/2024 - 12/2024</div>
                     </div>
                     <div class="info-subtitle">DEIMOS Brand Group — Sarıyer, İstanbul</div>
-                    <ul>
+                    <ul data-i18n="tr">
                         <li>Muhasebe operasyonlarında ödeme makbuzlarının sınıflandırılması ve KDV hariç net tutarlarının hesaplanması süreçlerine destek verildi.</li>
                         <li>Finansal verilerin düzenli ve optimize bir şekilde Excel dosyasına aktarılması sağlandı.</li>
+                    </ul>
+                    <ul data-i18n="en">
+                        <li>Assisted accounting staff by sorting payment receipts and calculating net (tax-excluded) amounts.</li>
+                        <li>Organized and structured financial data systematically into Microsoft Excel.</li>
+                    </ul>
+                    <ul data-i18n="it">
+                        <li>Assistito lo staff contabile ordinando le ricevute di pagamento e calcolando gli importi netti (esclusi di tasse).</li>
+                        <li>Organizzato e strutturato i dati finanziari in modo sistematico su Microsoft Excel.</li>
                     </ul>
                 </div>
 
@@ -389,17 +463,33 @@
                         <div class="info-date">10/2022 - 10/2023</div>
                     </div>
                     <div class="info-subtitle">Maçkolik İnternet Hizmetleri Ticaret A.Ş. — Kadıköy, İstanbul</div>
-                    <ul>
+                    <ul data-i18n="tr">
                         <li>Yeni özelliklerin ve sistem güncellemelerinin canlıya geçiş öncesi uygulama içi test süreçleri (in-app testing) yönetildi.</li>
                         <li>Kullanılabilirlik geri bildirimleri ve metrik analizleri doğrultusunda ürün geliştirme süreçlerine öneriler sunuldu.</li>
                         <li>Yinelemeli (iterative) ürün geliştirme döngülerinde ürün sahipleri ve mühendislik ekipleri arasında köprü görevi üstlenildi.</li>
                         <li>Uygulama verimliliğini ve kullanıcı deneyimini iyileştirmek üzere veri odaklı analizler hazırlandı.</li>
                     </ul>
+                    <ul data-i18n="en">
+                        <li>Actively participated in in-app testing of new features, updates, and system validations.</li>
+                        <li>Supported product development through usability feedback and data-driven feature suggestions.</li>
+                        <li>Collaborated closely with product and engineering teams during iterative development cycles.</li>
+                        <li>Prepared and presented product-related analyses to improve application usability and efficiency.</li>
+                    </ul>
+                    <ul data-i18n="it">
+                        <li>Partecipato attivamente all'in-app testing di nuove funzionalità, aggiornamenti e convalide di sistema.</li>
+                        <li>Supportato lo sviluppo del prodotto attraverso feedback sull'usabilità e suggerimenti basati sui dati.</li>
+                        <li>Collaborato strettamente con i team di prodotto e ingegneria durante i cicli di sviluppo iterativi.</li>
+                        <li>Preparato e presentato analisi relative al prodotto per migliorare l'usabilità e l'efficienza dell'applicazione.</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="card">
-                <h2 class="section-title">Education</h2>
+                <h2 class="section-title">
+                    <span data-i18n="tr">Eğitim</span>
+                    <span data-i18n="en">Education</span>
+                    <span data-i18n="it">Formazione</span>
+                </h2>
                 
                 <div class="info-item">
                     <div class="info-header">
@@ -416,14 +506,18 @@
                     </div>
                     <div class="info-subtitle">Marmara University — İstanbul, Türkiye</div>
                 </div>
-            </section>
+            </div>
 
         </div>
 
         <div class="right-column">
             
             <div class="card">
-                <h2 class="section-title">Tech Skills</h2>
+                <h2 class="section-title">
+                    <span data-i18n="tr">Yetkinlikler</span>
+                    <span data-i18n="en">Skills</span>
+                    <span data-i18n="it">Competenze</span>
+                </h2>
                 
                 <div class="skill-group">
                     <div class="skill-group-title">Product & User Experience</div>
@@ -457,12 +551,16 @@
             </div>
 
             <div class="card">
-                <h2 class="section-title">Languages</h2>
+                <h2 class="section-title">
+                    <span data-i18n="tr">Diller</span>
+                    <span data-i18n="en">Languages</span>
+                    <span data-i18n="it">Lingue</span>
+                </h2>
                 
                 <div class="lang-row">
                     <div class="lang-info">
                         <span class="lang-name">Turkish</span>
-                        <span class="lang-level">Native</span>
+                        <span class="lang-level"><span data-i18n="tr">Ana Dil</span><span data-i18n="en">Native</span><span data-i18n="it">Madrelingua</span></span>
                     </div>
                     <div class="progress-bar-bg">
                         <div class="progress-bar-fill" style="width: 100%;"></div>
@@ -501,7 +599,11 @@
             </div>
 
             <div class="card">
-                <h2 class="section-title">Voluntary & Background</h2>
+                <h2 class="section-title">
+                    <span data-i18n="tr">Gönüllülük & Spor</span>
+                    <span data-i18n="en">Volunteering</span>
+                    <span data-i18n="it">Volontariato</span>
+                </h2>
                 
                 <div class="info-item" style="margin-bottom: 12px;">
                     <div class="info-header">
@@ -522,7 +624,7 @@
                 <div class="info-item">
                     <div class="info-subtitle" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0; line-height:1.5;">
                         • <strong>Kızlar Sahada:</strong> Staff Member (2022)<br>
-                        • <strong>Football:</strong> Amatör Lig Şampiyonaları (2012-2019)
+                        • <strong>Football:</strong> <span data-i18n="tr">Amatör Lig Şampiyonaları (2012-2019)</span><span data-i18n="en">Amateur Leagues (2012-2019)</span><span data-i18n="it">Campionati Dilettantistici (2012-2019)</span>
                     </div>
                 </div>
             </div>
@@ -531,10 +633,27 @@
     </div>
 
     <footer>
-        <p>© 2026 İrfan Aşıcıoğlu. Powered by Sport & Product Portfolio v1.0</p>
+        <p>© 2026 İrfan Aşıcıoğlu. Powered by Sport & Product Portfolio v1.1</p>
     </footer>
 
 </div>
+
+<script>
+    function setLanguage(lang) {
+        // Body elementinin sınıfını değiştir (lang-tr, lang-en, lang-it)
+        document.body.className = 'lang-' + lang;
+        
+        // Dil butonlarının aktiflik durumunu güncelle
+        const buttons = document.querySelectorAll('.lang-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        // Tıklanan butona aktif sınıfı ekle
+        const currentBtn = Array.from(buttons).find(btn => btn.textContent.toLowerCase() === lang);
+        if (currentBtn) {
+            currentBtn.classList.add('active');
+        }
+    }
+</script>
 
 </body>
 </html>
