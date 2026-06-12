@@ -1,659 +1,360 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İrfan Aşıcıoğlu - Portfolio</title>
-    <style>
-        :root {
-            --bg-color: #0b111e;
-            --card-bg: #131c2e;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --accent-blue: #38bdf8;
-            --border-color: #1e293b;
-            --btn-bg: #1e293b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .wrapper {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        /* DİL SEÇENEKLERİ (SAĞ ÜST) */
-        .lang-switcher {
-            display: flex;
-            justify-content: flex-end;
-            gap: 6px;
-            margin-bottom: 10px;
-        }
-
-        .lang-btn {
-            background-color: var(--btn-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 4px 10px;
-            font-size: 0.7rem;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-            transition: all 0.2s ease;
-        }
-
-        .lang-btn:hover {
-            border-color: var(--accent-blue);
-            color: var(--text-main);
-        }
-
-        .lang-btn.active {
-            background-color: var(--accent-blue);
-            color: #0b111e;
-            border-color: var(--accent-blue);
-        }
-
-        /* BAŞLIK ALANI */
-        header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        header h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        header .subtitle {
-            font-size: 1.05rem;
-            color: var(--accent-blue);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 24px;
-        }
-
-        /* NAVİGASYON BUTONLARI */
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-
-        .nav-btn {
-            background-color: var(--btn-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            border-color: var(--accent-blue);
-            color: var(--text-main);
-        }
-
-        .nav-btn.active {
-            background-color: var(--accent-blue);
-            color: #0b111e;
-            font-weight: 600;
-        }
-
-        /* İLETİŞİM BİLGİLERİ */
-        .contact-bar {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .contact-bar a {
-            color: var(--text-muted);
-            text-decoration: none;
-        }
-
-        .contact-bar a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* İKİ SÜTUNLU YERLEŞİM (GRID) */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1.6fr 1fr;
-            gap: 20px;
-            margin-top: 15px;
-        }
-
-        /* KARTLAR */
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 24px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .section-title::before {
-            content: "//";
-            color: var(--accent-blue);
-        }
-
-        .summary-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* DENEYİM, EĞİTİM VE SERTİFİKA ÖGELERİ */
-        .info-item {
-            margin-bottom: 22px;
-        }
-
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 4px;
-        }
-
-        .info-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .info-date {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            background-color: #1e293b;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        .info-subtitle {
-            font-size: 0.85rem;
-            color: var(--accent-blue);
-            margin-bottom: 10px;
-        }
-
-        .info-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .info-item ul li {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin-bottom: 6px;
-            position: relative;
-            padding-left: 14px;
-        }
-
-        .info-item ul li::before {
-            content: "•";
-            color: var(--accent-blue);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        /* YETKİNLİK GRUPLARI (TECH SKILLS) */
-        .skill-group {
-            margin-bottom: 18px;
-        }
-
-        .skill-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .skill-group-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-
-        .badges-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .skill-badge {
-            background-color: #0b111e;
-            border: 1px solid var(--border-color);
-            color: #e2e8f0;
-            padding: 5px 12px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-        }
-
-        /* DİLLER (PROGRESS BAR) */
-        .lang-row {
-            margin-bottom: 14px;
-        }
-
-        .lang-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .lang-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-        }
-
-        .lang-name {
-            font-weight: 500;
-        }
-
-        .lang-level {
-            color: var(--accent-blue);
-            font-size: 0.75rem;
-        }
-
-        .progress-bar-bg {
-            background-color: #1e293b;
-            height: 5px;
-            border-radius: 3px;
-            width: 100%;
-        }
-
-        .progress-bar-fill {
-            background-color: var(--accent-blue);
-            height: 100%;
-            border-radius: 3px;
-        }
-
-        /* SAYFA ALTI YAZISI */
-        footer {
-            text-align: center;
-            font-size: 0.7rem;
-            color: #334155;
-            margin-top: 30px;
-            padding-bottom: 10px;
-        }
-
-        /* DİL GİZLEME/GÖSTERME SINIFI */
-        [data-i18n] {
-            display: none;
-        }
-        
-        .lang-tr [data-i18n="tr"],
-        .lang-en [data-i18n="en"],
-        .lang-it [data-i18n="it"] {
-            display: inline;
-        }
-
-        .lang-tr blockquote[data-i18n="tr"],
-        .lang-en blockquote[data-i18n="en"],
-        .lang-it blockquote[data-i18n="it"],
-        .lang-tr p[data-i18n="tr"],
-        .lang-en p[data-i18n="en"],
-        .lang-it p[data-i18n="it"],
-        .lang-tr div[data-i18n="tr"],
-        .lang-en div[data-i18n="en"],
-        .lang-it div[data-i18n="it"],
-        .lang-tr li[data-i18n="tr"],
-        .lang-en li[data-i18n="en"],
-        .lang-it li[data-i18n="it"] {
-            display: block;
-        }
-
-        .lang-tr span[data-i18n="tr"],
-        .lang-en span[data-i18n="en"],
-        .lang-it span[data-i18n="it"] {
-            display: inline-block;
-        }
-
-        /* MOBİL UYUM */
-        @media (max-width: 900px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-            body {
-                padding: 20px 10px;
-            }
-        }
-    </style>
-</head>
-<body class="lang-tr"> <div class="wrapper">
-
-    <div class="lang-switcher">
-        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
-        <button class="lang-btn active" onclick="setLanguage('tr')">TR</button>
-        <button class="lang-btn" onclick="setLanguage('it')">IT</button>
-    </div>
-
-    <header>
-        <h1>İrfan Aşıcıoğlu</h1>
-        <div class="subtitle">Sports Management & Product Specialist</div>
-        
-        <div class="nav-buttons">
-            <a href="#" class="nav-btn active">
-                <span data-i18n="tr">📊 Panel</span>
-                <span data-i18n="en">📊 Dashboard</span>
-                <span data-i18n="it">📊 Dashboard</span>
-            </a>
-            <a href="#" class="nav-btn">
-                <span data-i18n="tr">💼 İş Deneyimi</span>
-                <span data-i18n="en">💼 Work Experience</span>
-                <span data-i18n="it">💼 Esperienza</span>
-            </a>
-            <a href="#" class="nav-btn">
-                <span data-i18n="tr">🛠️ Yetkinlikler</span>
-                <span data-i18n="en">🛠️ Tech Skills</span>
-                <span data-i18n="it">🛠️ Competenze</span>
-            </a>
-            <a href="#" class="nav-btn">
-                <span data-i18n="tr">🎓 Eğitim</span>
-                <span data-i18n="en">🎓 Education</span>
-                <span data-i18n="it">🎓 Formazione</span>
-            </a>
-        </div>
-
-        <div class="contact-bar">
-            <span>📞 +90 544-501-2001</span>
-            <span>|</span>
-            <span>✉️ <a href="mailto:irfanasiciogluu@gmail.com">irfanasiciogluu@gmail.com</a></span>
-            <span>|</span>
-            <span>🔗 <a href="https://linkedin.com/in/irfan" target="_blank">LinkedIn Profile</a></span>
-        </div>
-    </header>
-
-    <div class="main-grid">
-        
-        <div class="left-column">
-            
-            <div class="card">
-                <h2 class="section-title">
-                    <span data-i18n="tr">Özet</span>
-                    <span data-i18n="en">Summary</span>
-                    <span data-i18n="it">Sommario</span>
-                </h2>
-                <p class="summary-text" data-i18n="tr">
-                    Ekonomi kökenli, Spor Yönetimi alanında yüksek lisans derecesine sahip, ürün yönetimi, uygulama içi test süreçleri ve veri analitiği konularında deneyimli profesyonel. İş döngüleri boyunca disiplinler arası takımlarla ortak çalışarak ürün kullanılabilirliğini ve operasyonel verimliliği artırmaya odaklanır.
-                </p>
-                <p class="summary-text" data-i18n="en">
-                    Economics background with a Master's degree in Sports Management. Experienced in product management, in-app testing, and data analytics. Focused on enhancing product usability and operational efficiency by collaborating with cross-functional teams throughout development cycles.
-                </p>
-                <p class="summary-text" data-i18n="it">
-                    Background in Economia con un Master in Sports Management. Esperienza in gestione del prodotto, in-app testing e analisi dei dati. Focalizzato sul miglioramento dell'usabilità del prodotto e dell'efficienza operativa collaborando con team interfunzionali.
-                </p>
-            </div>
-
-            <div class="card">
-                <h2 class="section-title">
-                    <span data-i18n="tr">İş Deneyimi</span>
-                    <span data-i18n="en">Work Experience</span>
-                    <span data-i18n="it">Esperienza Lavorativa</span>
-                </h2>
-                
-                <div class="info-item">
-                    <div class="info-header">
-                        <div class="info-title">Accounting Intern</div>
-                        <div class="info-date">10/2024 - 12/2024</div>
-                    </div>
-                    <div class="info-subtitle">DEIMOS Brand Group — Sarıyer, İstanbul</div>
-                    <ul data-i18n="tr">
-                        <li>Muhasebe operasyonlarında ödeme makbuzlarının sınıflandırılması ve KDV hariç net tutarlarının hesaplanması süreçlerine destek verildi.</li>
-                        <li>Finansal verilerin düzenli ve optimize bir şekilde Excel dosyasına aktarılması sağlandı.</li>
-                    </ul>
-                    <ul data-i18n="en">
-                        <li>Assisted accounting staff by sorting payment receipts and calculating net (tax-excluded) amounts.</li>
-                        <li>Organized and structured financial data systematically into Microsoft Excel.</li>
-                    </ul>
-                    <ul data-i18n="it">
-                        <li>Assistito lo staff contabile ordinando le ricevute di pagamento e calcolando gli importi netti (esclusi di tasse).</li>
-                        <li>Organizzato e strutturato i dati finanziari in modo sistematico su Microsoft Excel.</li>
-                    </ul>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-header">
-                        <div class="info-title">Product Intern</div>
-                        <div class="info-date">10/2022 - 10/2023</div>
-                    </div>
-                    <div class="info-subtitle">Maçkolik İnternet Hizmetleri Ticaret A.Ş. — Kadıköy, İstanbul</div>
-                    <ul data-i18n="tr">
-                        <li>Yeni özelliklerin ve sistem güncellemelerinin canlıya geçiş öncesi uygulama içi test süreçleri (in-app testing) yönetildi.</li>
-                        <li>Kullanılabilirlik geri bildirimleri ve metrik analizleri doğrultusunda ürün geliştirme süreçlerine öneriler sunuldu.</li>
-                        <li>Yinelemeli (iterative) ürün geliştirme döngülerinde ürün sahipleri ve mühendislik ekipleri arasında köprü görevi üstlenildi.</li>
-                        <li>Uygulama verimliliğini ve kullanıcı deneyimini iyileştirmek üzere veri odaklı analizler hazırlandı.</li>
-                    </ul>
-                    <ul data-i18n="en">
-                        <li>Actively participated in in-app testing of new features, updates, and system validations.</li>
-                        <li>Supported product development through usability feedback and data-driven feature suggestions.</li>
-                        <li>Collaborated closely with product and engineering teams during iterative development cycles.</li>
-                        <li>Prepared and presented product-related analyses to improve application usability and efficiency.</li>
-                    </ul>
-                    <ul data-i18n="it">
-                        <li>Partecipato attivamente all'in-app testing di nuove funzionalità, aggiornamenti e convalide di sistema.</li>
-                        <li>Supportato lo sviluppo del prodotto attraverso feedback sull'usabilità e suggerimenti basati sui dati.</li>
-                        <li>Collaborato strettamente con i team di prodotto e ingegneria durante i cicli di sviluppo iterativi.</li>
-                        <li>Preparato e presentato analisi relative al prodotto per migliorare l'usabilità e l'efficienza dell'applicazione.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2 class="section-title">
-                    <span data-i18n="tr">Eğitim</span>
-                    <span data-i18n="en">Education</span>
-                    <span data-i18n="it">Formazione</span>
-                </h2>
-                
-                <div class="info-item">
-                    <div class="info-header">
-                        <div class="info-title">Master in Sports Management</div>
-                        <div class="info-date">02/2025 - 02/2026</div>
-                    </div>
-                    <div class="info-subtitle">ESEI Business School — Barcelona, Spain</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-header">
-                        <div class="info-title">Bachelor Degree in Economics</div>
-                        <div class="info-date">10/2020 - 07/2024</div>
-                    </div>
-                    <div class="info-subtitle">Marmara University — İstanbul, Türkiye</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="right-column">
-            
-            <div class="card">
-                <h2 class="section-title">
-                    <span data-i18n="tr">Yetkinlikler</span>
-                    <span data-i18n="en">Skills</span>
-                    <span data-i18n="it">Competenze</span>
-                </h2>
-                
-                <div class="skill-group">
-                    <div class="skill-group-title">Product & User Experience</div>
-                    <div class="badges-wrapper">
-                        <span class="skill-badge">Product Thinking</span>
-                        <span class="skill-badge">User Experience</span>
-                        <span class="skill-badge">In-App Testing</span>
-                        <span class="skill-badge">Feature Validation</span>
-                    </div>
-                </div>
-
-                <div class="skill-group">
-                    <div class="skill-group-title">Data & Productivity</div>
-                    <div class="badges-wrapper">
-                        <span class="skill-badge">Excel (Reporting)</span>
-                        <span class="skill-badge">AI Tools</span>
-                        <span class="skill-badge">Productivity Tools</span>
-                        <span class="skill-badge">Data Analysis</span>
-                    </div>
-                </div>
-
-                <div class="skill-group">
-                    <div class="skill-group-title">Management & Operations</div>
-                    <div class="badges-wrapper">
-                        <span class="skill-badge">Cross-functional Collaboration</span>
-                        <span class="skill-badge">Sports Marketing</span>
-                        <span class="skill-badge">Presentation</span>
-                        <span class="skill-badge">Documentation</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2 class="section-title">
-                    <span data-i18n="tr">Diller</span>
-                    <span data-i18n="en">Languages</span>
-                    <span data-i18n="it">Lingue</span>
-                </h2>
-                
-                <div class="lang-row">
-                    <div class="lang-info">
-                        <span class="lang-name">Turkish</span>
-                        <span class="lang-level"><span data-i18n="tr">Ana Dil</span><span data-i18n="en">Native</span><span data-i18n="it">Madrelingua</span></span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" style="width: 100%;"></div>
-                    </div>
-                </div>
-
-                <div class="lang-row">
-                    <div class="lang-info">
-                        <span class="lang-name">English</span>
-                        <span class="lang-level">C1 (Advanced)</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" style="width: 85%;"></div>
-                    </div>
-                </div>
-
-                <div class="lang-row">
-                    <div class="lang-info">
-                        <span class="lang-name">Spanish</span>
-                        <span class="lang-level">A2/B1 Level</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" style="width: 55%;"></div>
-                    </div>
-                </div>
-
-                <div class="lang-row">
-                    <div class="lang-info">
-                        <span class="lang-name">Italian</span>
-                        <span class="lang-level">A1 Level</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" style="width: 30%;"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2 class="section-title">
-                    <span data-i18n="tr">Gönüllülük & Spor</span>
-                    <span data-i18n="en">Volunteering</span>
-                    <span data-i18n="it">Volontariato</span>
-                </h2>
-                
-                <div class="info-item" style="margin-bottom: 12px;">
-                    <div class="info-header">
-                        <div class="info-title" style="font-size:0.85rem;">UEFA Europa League Final</div>
-                        <div class="info-date" style="font-size:0.7rem;">05/2026</div>
-                    </div>
-                    <div class="info-subtitle" style="font-size:0.8rem; margin-bottom:0;">Ceremonies Lead Volunteer</div>
-                </div>
-
-                <div class="info-item" style="margin-bottom: 12px;">
-                    <div class="info-header">
-                        <div class="info-title" style="font-size:0.85rem;">Sports World Congress</div>
-                        <div class="info-date" style="font-size:0.7rem;">02/2026</div>
-                    </div>
-                    <div class="info-subtitle" style="font-size:0.8rem; margin-bottom:0;">Staff Member — Barcelona</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-subtitle" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0; line-height:1.5;">
-                        • <strong>Kızlar Sahada:</strong> Staff Member (2022)<br>
-                        • <strong>Football:</strong> <span data-i18n="tr">Amatör Lig Şampiyonaları (2012-2019)</span><span data-i18n="en">Amateur Leagues (2012-2019)</span><span data-i18n="it">Campionati Dilettantistici (2012-2019)</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2026 İrfan Aşıcıoğlu. Powered by Sport & Product Portfolio v1.1</p>
-    </footer>
-
-</div>
-
-<script>
-    function setLanguage(lang) {
-        // Body elementinin sınıfını değiştir (lang-tr, lang-en, lang-it)
-        document.body.className = 'lang-' + lang;
-        
-        // Dil butonlarının aktiflik durumunu güncelle
-        const buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        
-        // Tıklanan butona aktif sınıfı ekle
-        const currentBtn = Array.from(buttons).find(btn => btn.textContent.toLowerCase() === lang);
-        if (currentBtn) {
-            currentBtn.classList.add('active');
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asicioglu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-</script>
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #080808;
+      color: #f4f4f4;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      background: rgba(8, 8, 8, 0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      color: #bdbdbd;
+    }
+
+    .menu a:hover {
+      color: #fff;
+    }
+
+    .langs {
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 110px 24px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      color: #8e8e8e;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 96px);
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: -0.06em;
+      margin-bottom: 32px;
+    }
+
+    .hero p {
+      font-size: clamp(18px, 2vw, 24px);
+      color: #c8c8c8;
+      max-width: 720px;
+    }
+
+    .cta {
+      margin-top: 42px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 20px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .btn.primary {
+      background: #f4f4f4;
+      color: #080808;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .section-title {
+      font-size: 14px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 60px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 40px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+    }
+
+    .text {
+      color: #c7c7c7;
+      font-size: 17px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+    }
+
+    .card small {
+      color: #888;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .card p {
+      color: #aaa;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .tag {
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 50px 24px;
+      text-align: center;
+      color: #777;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @media (max-width: 760px) {
+      nav {
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .menu {
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      section {
+        padding: 90px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#writing">Writing</a>
+        <a href="#notes">Notes</a>
+        <a href="#reading">Reading</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="langs">
+        <span>TR</span>
+        <span>EN</span>
+        <span>IT</span>
+        <span>ES</span>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">asicioglu.io</div>
+
+      <h1>Spor, medya ve iş dünyasının kesişiminde.</h1>
+
+      <p>
+        Spor endüstrisi, ürün geliştirme, medya ve uluslararası kariyer üzerine
+        yazılar, notlar ve çalışmalar.
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="#writing">Yazıları oku</a>
+        <a class="btn" href="#about">Hakkımda</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-title">About</div>
+    <div class="grid">
+      <h2>Kişisel bir hub. CV değil, dijital bir merkez.</h2>
+      <div class="text">
+        <p>
+          Ben İrfan Aşıcıoğlu. Ekonomi, spor yönetimi, ürün düşüncesi ve spor
+          organizasyonları alanlarında deneyim kazandım. Bu alanı sporun sadece
+          sahadaki kısmı üzerinden değil; medya, iş modeli, ürün, kültür ve insan
+          hikâyeleri üzerinden düşünmek için kullanıyorum.
+        </p>
+
+        <div class="skills">
+          <span class="tag">Sports Business</span>
+          <span class="tag">Product Thinking</span>
+          <span class="tag">Football</span>
+          <span class="tag">Media</span>
+          <span class="tag">Writing</span>
+          <span class="tag">Event Operations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="writing">
+    <div class="section-title">Writing</div>
+    <div class="cards">
+      <div class="card">
+        <small>Essay · Coming soon</small>
+        <h3>Türk futbolu nasıl sürdürülebilir değer yaratabilir?</h3>
+        <p>Spor kulüpleri, medya gelirleri, taraftar kültürü ve finansal yapı üzerine uzun form bir yazı.</p>
+      </div>
+
+      <div class="card">
+        <small>Essay · Coming soon</small>
+        <h3>Spor medyasının değişen dili</h3>
+        <p>Kısa video, canlı veri, taraftar davranışı ve yeni medya formatları üzerine gözlemler.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="notes">
+    <div class="section-title">Notes</div>
+    <div class="grid">
+      <h2>Kısa düşünceler, gözlemler ve fikir parçaları.</h2>
+      <div class="text">
+        <p>
+          Notes bölümü; maçlar, kulüpler, spor ekonomisi, medya trendleri ve
+          profesyonel deneyimler üzerine daha kısa ve serbest yazılar için olacak.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reading">
+    <div class="section-title">Reading</div>
+    <div class="cards">
+      <div class="card">
+        <small>Book list</small>
+        <h3>Sports, business and media reading list</h3>
+        <p>
+          Spor ekonomisi, futbol kültürü, medya, ürün ve iş dünyası üzerine kitaplar,
+          raporlar ve makaleler.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title">Contact</div>
+    <div class="grid">
+      <h2>Bağlantıda kalalım.</h2>
+      <div class="text">
+        <p>Email: <a href="mailto:irfan@asicioglu.io">irfan@asicioglu.io</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/irfanasicioglu/" target="_blank">linkedin.com/in/irfanasicioglu</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 asicioglu.io
+  </footer>
 
 </body>
 </html>
