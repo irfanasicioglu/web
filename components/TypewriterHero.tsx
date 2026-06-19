@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { HoverButton } from '@/components/ui/hover-button'
 import { useT } from '@/contexts/LanguageContext'
 
-const TYPE_SPEED = 110
+const TYPE_SPEED = 55
 const START_DELAY = 800
 const IMG_W = 240
 
@@ -71,7 +71,7 @@ function playKeyClick() {
     const source = ctx.createBufferSource()
     source.buffer = buffer
     const gain = ctx.createGain()
-    gain.gain.value = 0.25
+    gain.gain.value = 0.125
     source.connect(gain)
     gain.connect(ctx.destination)
     source.start()
@@ -85,7 +85,9 @@ export default function TypewriterHero() {
   const [cursorVisible, setCursorVisible] = useState(true)
   const [done, setDone]               = useState(false)
   const [mouse, setMouse]             = useState<{ x: number; y: number } | null>(null)
-  const [processedSrc, setProcessedSrc] = useState('/caricature.png')
+  const [processedSrcs, setProcessedSrcs] = useState<string[]>([])
+  const [imgIdx, setImgIdx]           = useState(0)
+  const [imgVisible, setImgVisible]   = useState(true)
   const [activeBtn, setActiveBtn]     = useState<'main' | 'cv' | null>(null)
   const activeBtnRef                  = useRef<'main' | 'cv' | null>(null)
   const indexRef                      = useRef(0)
@@ -139,13 +141,41 @@ export default function TypewriterHero() {
   }
 
   useEffect(() => {
-    removeWhiteBg('/caricature.png').then(setProcessedSrc)
+    Promise.all([
+      removeWhiteBg('/caricature.png'),
+      removeWhiteBg('/caricature2.png'),
+      removeWhiteBg('/caricature3.png'),
+    ]).then(setProcessedSrcs)
   }, [])
+
+  const handleImageClick = () => {
+    if (processedSrcs.length < 3) return
+    setImgVisible(false)
+    setTimeout(() => {
+      setImgIdx(prev => (prev + 1) % 3)
+      setImgVisible(true)
+    }, 320)
+  }
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => setMouse({ x: e.clientX, y: e.clientY })
     window.addEventListener('mousemove', onMove)
     return () => window.removeEventListener('mousemove', onMove)
+  }, [])
+
+  // About bölümünü geçince müziği durdur
+  useEffect(() => {
+    const onScroll = () => {
+      const about = document.getElementById('about')
+      if (!about) return
+      if (window.scrollY > about.offsetTop + about.offsetHeight - 80) {
+        daiDaiAudio?.pause()
+        setActive(null)
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const tiltX = mouse ? ((mouse.y / window.innerHeight) - 0.5) * -12 : 0
@@ -186,15 +216,53 @@ export default function TypewriterHero() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6">
 
-      {/* Karikatür — 3D tilt */}
+      {/* Karikatür — 3D tilt + tıklama geçişi */}
       <div style={{ perspective: '700px', flexShrink: 0 }}>
         <div style={{ display: 'inline-block', transform: `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`, transition: 'transform 0.1s ease-out' }}>
-          <div ref={caricatureRef} style={{ position: 'relative', display: 'inline-block' }}>
+          <div
+            ref={caricatureRef}
+            onClick={handleImageClick}
+            style={{ position: 'relative', display: 'inline-block', cursor: processedSrcs.length === 3 ? 'pointer' : 'default' }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={processedSrc} alt="İrfan Aşıcıoğlu" width={IMG_W} style={{ display: 'block', height: 'auto' }} />
+            <img
+              src={processedSrcs[imgIdx] ?? '/caricature.png'}
+              alt="İrfan Aşıcıoğlu"
+              width={IMG_W}
+              style={{
+                display: 'block',
+                height: 'auto',
+                opacity: imgVisible ? 1 : 0,
+                transition: 'opacity 0.32s ease',
+              }}
+            />
           </div>
         </div>
       </div>
+
+      {/* Pagination noktaları */}
+      {processedSrcs.length === 3 && (
+        <div style={{ display: 'flex', gap: '7px', marginTop: '-16px' }}>
+          {[0, 1, 2].map(i => (
+            <div
+              key={i}
+              onClick={() => {
+                if (i === imgIdx) return
+                setImgVisible(false)
+                setTimeout(() => { setImgIdx(i); setImgVisible(true) }, 320)
+              }}
+              style={{
+                width: i === imgIdx ? '18px' : '6px',
+                height: '6px',
+                borderRadius: '3px',
+                background: i === imgIdx ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.25)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <h1
         className="max-w-[820px] text-center text-white"
