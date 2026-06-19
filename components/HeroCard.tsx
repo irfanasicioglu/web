@@ -29,7 +29,7 @@ export default function HeroCard() {
       >
         {/* ── ÖN YÜZ ── */}
         <div
-          className="absolute inset-0 flex flex-col justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-10 backdrop-blur-sm"
+          className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-10 backdrop-blur-sm text-center"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
@@ -39,12 +39,12 @@ export default function HeroCard() {
             className="text-white"
             style={{
               fontFamily: 'var(--font-pixel)',
-              fontSize: 'clamp(26px, 4.5vw, 52px)',
-              lineHeight: 1.9,
+              fontSize: 'clamp(32px, 6vw, 68px)',
+              lineHeight: 2,
               textShadow: '0 0 30px rgba(160,180,255,0.35)',
             }}
           >
-            selam sana<br />dünyalı
+            Selam sana<br />dünyalı
           </h1>
 
           <p
