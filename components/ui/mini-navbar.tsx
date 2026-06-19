@@ -136,7 +136,7 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-[42px] sm:flex">
           {navLinksData.map(link => (
-            <AnimatedNavLink key={link.href} href={link.href} label={link.label} icon={link.icon} />
+            <AnimatedNavLink key={link.href} href={link.href} label={link.label} icon={link.icon} modal={link.modal} />
           ))}
         </nav>
 
