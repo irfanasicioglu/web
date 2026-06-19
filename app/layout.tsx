@@ -6,6 +6,8 @@ import StarField from '@/components/StarField'
 import { Navbar } from '@/components/ui/mini-navbar'
 import { PageSearch } from '@/components/ui/page-search'
 import { ForumModal } from '@/components/ui/forum-modal'
+import { LanguageProvider } from '@/contexts/LanguageContext'
+import { LanguageSwitcher } from '@/components/ui/language-switcher'
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -29,11 +31,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="tr" suppressHydrationWarning className={`${roboto.variable} ${pixelifySans.variable}`}>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <StarField />
-          <Navbar />
-          <PageSearch />
-          <ForumModal />
-          {children}
+          <LanguageProvider>
+            <StarField />
+            <Navbar />
+            <LanguageSwitcher />
+            <PageSearch />
+            <ForumModal />
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

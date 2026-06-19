@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Search, X, ChevronUp, ChevronDown } from 'lucide-react'
+import { useT } from '@/contexts/LanguageContext'
 
 const SKIP_TAGS = new Set(['script', 'style', 'noscript', 'input', 'textarea', 'header', 'nav', 'mark'])
 
@@ -59,6 +60,7 @@ function clearMarks() {
 }
 
 export function PageSearch() {
+  const { t } = useT()
   const [isOpen, setIsOpen]         = useState(false)
   const [query, setQuery]           = useState('')
   const [marks, setMarks]           = useState<HTMLElement[]>([])
@@ -185,12 +187,12 @@ export function PageSearch() {
                 if (!e.target.value) { clearMarks(); setMarks([]) }
               }}
               onKeyDown={handleKey}
-              placeholder="Sayfada ara..."
+              placeholder={t.search.placeholder}
               className="flex-1 min-w-0 bg-transparent text-white text-[13px] outline-none placeholder-white/25 font-[family-name:var(--font-roboto)]"
             />
 
             {isOpen && query && marks.length === 0 && (
-              <span className="text-[11px] text-white/25 pr-3 flex-shrink-0 whitespace-nowrap">yok</span>
+              <span className="text-[11px] text-white/25 pr-3 flex-shrink-0 whitespace-nowrap">{t.search.notFound}</span>
             )}
 
             {marks.length > 0 && (
