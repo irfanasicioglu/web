@@ -104,10 +104,11 @@ export default function TypewriterHero() {
   }
 
   const hoverEnter = () => {
-    if (activeBtnRef.current !== null) return  // tıklanmış çalıyor, kesme
+    if (activeBtnRef.current !== null) return
     const a = getAudio()
-    a.currentTime = 11  // 0:11
-    a.play().catch(() => {})
+    const seekAndPlay = () => { a.currentTime = 11; a.play().catch(() => {}) }
+    if (a.readyState >= 1) seekAndPlay()
+    else a.addEventListener('loadedmetadata', seekAndPlay, { once: true })
   }
 
   const hoverLeave = () => {
@@ -119,13 +120,21 @@ export default function TypewriterHero() {
     if (activeBtnRef.current === btn) {
       daiDaiAudio?.pause()
       setActive(null)
-    } else {
-      const a = getAudio()
-      a.currentTime = DAI_DAI_START  // 1:34
+      return
+    }
+    const a = getAudio()
+    setActive(btn)
+    a.onended = () => setActive(null)
+
+    // iOS Safari: currentTime ayarlamadan önce metadata hazır olmalı
+    const seekAndPlay = () => {
+      a.currentTime = DAI_DAI_START
       a.play().catch(() => {})
-      setActive(btn)
-      // Şarkı bitince sıfırla
-      a.onended = () => setActive(null)
+    }
+    if (a.readyState >= 1) {
+      seekAndPlay()
+    } else {
+      a.addEventListener('loadedmetadata', seekAndPlay, { once: true })
     }
   }
 
