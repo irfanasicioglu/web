@@ -1,29 +1,37 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Home, User, FileText, StickyNote, BookOpen, Mail, type LucideIcon } from 'lucide-react';
+import { Home, User, FileText, StickyNote, Mail, MessagesSquare, type LucideIcon } from 'lucide-react';
 
-const navLinksData: { label: string; href: string; icon: LucideIcon }[] = [
+const navLinksData: { label: string; href: string; icon: LucideIcon; modal?: string }[] = [
   { label: 'Home',    href: '#home',    icon: Home },
   { label: 'About',   href: '#about',   icon: User },
-  { label: 'Writing', href: '#writing', icon: FileText },
+  { label: 'Kariyer', href: '#kariyer', icon: FileText },
   { label: 'Notes',   href: '#notes',   icon: StickyNote },
-  { label: 'Reading', href: '#reading', icon: BookOpen },
   { label: 'Contact', href: '#contact', icon: Mail },
+  { label: 'Forum',   href: '#',        icon: MessagesSquare, modal: 'open-forum' },
 ];
 
-const AnimatedNavLink = ({ href, label, icon: Icon }: { href: string; label: string; icon: LucideIcon }) => (
-  <a href={href} className="group block overflow-hidden h-[27px]">
-    <div className="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2">
-      <span className="flex h-[27px] items-center justify-center">
-        <Icon className="h-[21px] w-[21px] text-gray-400" strokeWidth={1.4} />
-      </span>
-      <span className="flex h-[27px] items-center text-[20px] leading-none text-white whitespace-nowrap font-[family-name:var(--font-roboto)]">
-        {label}
-      </span>
-    </div>
-  </a>
-);
+const AnimatedNavLink = ({ href, label, icon: Icon, modal }: { href: string; label: string; icon: LucideIcon; modal?: string }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (modal) {
+      e.preventDefault()
+      window.dispatchEvent(new CustomEvent(modal))
+    }
+  }
+  return (
+    <a href={href} onClick={handleClick} className="group block overflow-hidden h-[27px]">
+      <div className="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2">
+        <span className="flex h-[27px] items-center justify-center">
+          <Icon className="h-[21px] w-[21px] text-gray-400" strokeWidth={1.4} />
+        </span>
+        <span className="flex h-[27px] items-center text-[20px] leading-none text-white whitespace-nowrap font-[family-name:var(--font-roboto)]">
+          {label}
+        </span>
+      </div>
+    </a>
+  )
+};
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -160,7 +168,10 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className="flex items-center gap-2 text-[14px] text-gray-400 transition-colors hover:text-white font-[family-name:var(--font-roboto)]"
-              onClick={() => setIsOpen(false)}
+              onClick={e => {
+                setIsOpen(false)
+                if (link.modal) { e.preventDefault(); window.dispatchEvent(new CustomEvent(link.modal)) }
+              }}
             >
               <link.icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
               {link.label}

@@ -4,6 +4,8 @@ import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import StarField from '@/components/StarField'
 import { Navbar } from '@/components/ui/mini-navbar'
+import { PageSearch } from '@/components/ui/page-search'
+import { ForumModal } from '@/components/ui/forum-modal'
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -29,6 +31,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <StarField />
           <Navbar />
+          <PageSearch />
+          <ForumModal />
           {children}
         </ThemeProvider>
       </body>
