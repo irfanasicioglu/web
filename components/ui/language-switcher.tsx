@@ -14,7 +14,7 @@ export function LanguageSwitcher() {
 
   return (
     <div
-      className="fixed top-6 right-6 z-50 flex items-center gap-1.5"
+      className="fixed top-6 right-6 z-50 hidden sm:flex items-center gap-1.5"
       style={{ fontFamily: 'var(--font-roboto)' }}
     >
       {LANGS.map(({ code, flag, label }) => {

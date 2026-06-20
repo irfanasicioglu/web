@@ -3,6 +3,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { Home, User, FileText, StickyNote, Mail, MessagesSquare, type LucideIcon } from 'lucide-react';
 import { useT } from '@/contexts/LanguageContext';
+import type { Lang } from '@/lib/translations';
+
+const LANGS: { code: Lang; flag: string; label: string }[] = [
+  { code: 'tr', flag: '🇹🇷', label: 'TR' },
+  { code: 'en', flag: '🇬🇧', label: 'EN' },
+  { code: 'es', flag: '🇪🇸', label: 'ES' },
+]
 
 type NavLink = { label: string; href: string; icon: LucideIcon; modal?: string }
 
@@ -28,7 +35,7 @@ const AnimatedNavLink = ({ href, label, icon: Icon, modal }: NavLink) => {
 };
 
 export function Navbar() {
-  const { t } = useT()
+  const { t, lang, setLang } = useT()
   const [isOpen, setIsOpen] = useState(false);
   const [shapeClass, setShapeClass] = useState('rounded-full');
   const shapeTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -161,6 +168,26 @@ export function Navbar() {
             </a>
           ))}
         </nav>
+
+        {/* Dil seçimi — sadece mobil menüde */}
+        <div className="flex items-center gap-2 pt-2 pb-1">
+          {LANGS.map(({ code, flag, label }) => (
+            <button
+              key={code}
+              onClick={() => { setLang(code); setIsOpen(false) }}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[12px] font-semibold transition-all duration-200 font-[family-name:var(--font-roboto)]"
+              style={{
+                background: lang === code ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)',
+                border: lang === code ? '1px solid rgba(255,255,255,0.35)' : '1px solid rgba(255,255,255,0.1)',
+                color: lang === code ? '#fff' : 'rgba(255,255,255,0.45)',
+                letterSpacing: '0.06em',
+              }}
+            >
+              <span style={{ fontSize: '14px', lineHeight: 1 }}>{flag}</span>
+              <span>{label}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </header>
   );
