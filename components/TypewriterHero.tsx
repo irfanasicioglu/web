@@ -91,6 +91,7 @@ export default function TypewriterHero() {
   const [activeBtn, setActiveBtn]     = useState<'main' | 'cv' | null>(null)
   const activeBtnRef                  = useRef<'main' | 'cv' | null>(null)
   const indexRef                      = useRef(0)
+  const intervalRef                   = useRef<ReturnType<typeof setInterval> | null>(null)
   const caricatureRef                 = useRef<HTMLDivElement>(null)
 
   // activeBtnRef her zaman state ile senkron
@@ -182,25 +183,36 @@ export default function TypewriterHero() {
   const tiltY = mouse ? ((mouse.x / window.innerWidth) - 0.5) * 12 : 0
 
   useEffect(() => {
-    // Dil değişince animasyonu sıfırla
+    // Önceki interval varsa hemen durdur
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
     indexRef.current = 0
     setDisplayed('')
     setDone(false)
 
     const start = setTimeout(() => {
       const text = t.hero
-      const interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         indexRef.current++
         setDisplayed(text.slice(0, indexRef.current))
         playKeyClick()
         if (indexRef.current === text.length) {
-          clearInterval(interval)
+          clearInterval(intervalRef.current!)
+          intervalRef.current = null
           setDone(true)
         }
       }, TYPE_SPEED)
-      return () => clearInterval(interval)
     }, START_DELAY)
-    return () => clearTimeout(start)
+
+    return () => {
+      clearTimeout(start)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang])
 
