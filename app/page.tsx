@@ -43,7 +43,7 @@ export default function Home() {
               <p>
                 {t.about.p3pre}{' '}
                 <a
-                  href="/business-plan.pdf"
+                  href={encodeURI('/FanStreet Deck kopyası.pdf')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline underline-offset-3 decoration-white/40 hover:decoration-white transition-colors italic"
