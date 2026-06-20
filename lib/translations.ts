@@ -1,4 +1,4 @@
-export type Lang = 'tr' | 'en' | 'es'
+export type Lang = 'tr' | 'en' | 'es' | 'it'
 
 export type Translations = {
   hero: string
@@ -284,6 +284,92 @@ export const translations: Record<Lang, Translations> = {
     search: {
       placeholder: 'Buscar en la página...',
       notFound: 'no encontrado',
+    },
+  },
+
+  it: {
+    hero: "Vuoi conoscere più da vicino Irfan Aşıcıoğlu?",
+    heroBtn1: 'Clicca ora',
+    heroBtn2: 'Vedi CV',
+    heroBtnStop: 'Ferma',
+
+    nav: {
+      home: 'Home',
+      about: 'Chi sono',
+      kariyer: 'Carriera',
+      notes: 'Note',
+      contact: 'Contatti',
+      forum: 'Forum',
+    },
+
+    about: {
+      label: 'Chi sono',
+      title: 'Un hub personale. Non un CV, un centro digitale.',
+      p1: 'Sono Irfan Aşıcıoğlu. Mi sono laureato al Dipartimento di Economia (in inglese) dell\'Università di Marmara nel giugno 2024. Questo percorso mi ha arricchito sotto ogni aspetto; con le solide basi accademiche acquisite, ho mosso i primi passi nel mondo professionale.',
+      p2: 'Dopo la laurea, la mia profonda passione per lo sport mi ha guidato verso una nuova strada. Nel febbraio 2025 sono stato ammesso al master in Sports Management presso',
+      p2school: 'ESEI Business School',
+      p2rest: 'a Barcellona e mi sono trasferito in Spagna. Questo programma di un anno ha rappresentato un punto di svolta nella mia carriera. Ogni momento trascorso a Barcellona — le esperienze vissute, i legami creati e le prospettive acquisite — sono valori che porterò con me per tutta la vita.',
+      p3pre: 'Ho scritto la mia tesi su',
+      p3thesis: 'Developing a Fan-Centric Football Mobile Application: A Business Plan',
+      p3rest: 'Questo processo di ricerca mi ha offerto l\'opportunità di analizzare l\'industria del calcio, la psicologia dei tifosi e lo sviluppo di prodotti digitali da un\'unica prospettiva.',
+    },
+
+    career: {
+      label: 'Carriera',
+      title: 'Percorso Professionale',
+      deimos: {
+        role: 'ACCOUNTING INTERN',
+        bullets: [
+          'Ho supportato le operazioni di chiusura mensile attraverso l\'elaborazione sistematica delle ricevute, il calcolo delle esclusioni fiscali e l\'organizzazione dei dati.',
+        ],
+      },
+      mackolik: {
+        role: 'PRODUCT INTERN',
+        bullets: [
+          'Ho testato attivamente nuove funzionalità prima del lancio, identificando problemi critici di usabilità prima che raggiungessero gli utenti finali.',
+          'Ho proposto miglioramenti alle funzionalità e all\'usabilità, diversi dei quali sono stati successivamente implementati nel prodotto live.',
+          'Ho collaborato con i team di prodotto e ingegneria nei cicli di sviluppo agile, fornendo contributi sia qualitativi che analitici.',
+          'Ho preparato e presentato analisi delle performance del prodotto che hanno guidato le decisioni della roadmap e i miglioramenti UX.',
+        ],
+      },
+    },
+
+    notes: {
+      label: 'Note',
+      title: 'Pensieri brevi, osservazioni e frammenti di idee.',
+      body: 'La sezione Note sarà dedicata a scritti più brevi e liberi su partite, club, economia dello sport, tendenze mediatiche ed esperienze professionali.',
+    },
+
+    contact: {
+      label: 'Contatti',
+      title: 'Contattami',
+      body: 'Hai un\'idea, vuoi collaborare o semplicemente dire ciao? Ogni messaggio è il benvenuto.',
+    },
+
+    forum: {
+      title: 'Invia un Messaggio',
+      subtitle: 'Compila il modulo e ti risponderò il prima possibile.',
+      name: 'Nome e Cognome',
+      namePlaceholder: 'Mario Rossi',
+      email: 'Email',
+      emailPlaceholder: 'esempio@mail.com',
+      subject: 'Oggetto',
+      subjectPlaceholder: 'Collaborazione, domanda, idea…',
+      message: 'Messaggio',
+      messagePlaceholder: 'Scrivi il tuo messaggio qui…',
+      send: 'Invia',
+      sending: 'Invio in corso…',
+      successTitle: 'Messaggio ricevuto!',
+      successBody: 'Ti risponderò il prima possibile.',
+      close: 'Chiudi',
+      error: 'Si è verificato un errore, riprova.',
+    },
+
+    footer: '© 2026 asicioglu.io',
+
+    search: {
+      placeholder: 'Cerca nella pagina...',
+      notFound: 'non trovato',
     },
   },
 }
